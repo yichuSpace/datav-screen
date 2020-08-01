@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Loading :width="200" :height="200" v-if="loading">
+      <div>加载中。。。。。。。。。。</div>
+    </Loading>
+
+    <Container :options="{ width: 1536, height: 722 }" v-else>
+      <div style="width:1000px">
+        <FlyBox>
+          <div>
+            <div>sadfsaf</div>
+          </div>
+        </FlyBox>
+      </div>
+    </Container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import { ref } from 'vue'
 export default {
-  name: "Home",
+  name: 'Home',
+
   components: {
-    HelloWorld
+  },
+  setup (ctx) {
+    const loading = ref(true)
+    setTimeout(() => {
+      loading.value = false
+    }, 3000)
+    return {
+      loading
+    }
   }
-};
+}
 </script>
+<style lang="scss" scoped>
+.home {
+  background: #000;
+}
+</style>
